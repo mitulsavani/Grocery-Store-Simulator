@@ -1,6 +1,4 @@
-// DO NOT ADD NEW METHODS OR NEW DATA FIELDS!
-
-package PJ3;
+package GroceryStroreSimulator;
 
 class Cashier {
 
