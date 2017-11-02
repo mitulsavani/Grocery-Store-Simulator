@@ -19,14 +19,12 @@ class Cashier {
    private int totalBusyTime;
    private int totalCustomers;
 
-   // Constructor
    Cashier()
    {
 	this(-1);
    }
 
 
-   // Constructor with cashier id
    Cashier(int cashierId)
    {
 	this.cashierID=cashierId;
@@ -81,13 +79,11 @@ class Cashier {
    // update statistical data 
    void updateTotalFreeTime()
    {
-       //add coments
 	totalFreeTime += (endFreeTime-startFreeTime);
    }
 
    void updateTotalBusyTime()
    {
-       //add coments
 	totalBusyTime += (endBusyTime-startBusyTime);
    }
 
@@ -97,17 +93,9 @@ class Cashier {
    }
 
 
-   // Start serving a customer
+   // Started serving a customer
    void startServeCustomer(Customer aCustomer, int currentTime)
    {
-  	// goal  : start serving aCustomer at currentTime
-        //
-	// steps : set endFreeTime, update TotalFreeTime
-	//         set startBusyTime, endBusyTime, serveCustomer
-  	//         set aCustomer waitTime, finsihTime 
-	//         update totalCustomers
-	
-	// add statements
        setEndFreeTime(currentTime);
        updateTotalFreeTime();
        setStartBusyTime(currentTime);
@@ -122,12 +110,6 @@ class Cashier {
    // End serving a customer
    Customer endServeCustomer()
    {
-  	// goal  : end serving aCustomer at endBusyTime
-        //
-	// steps : update TotalBusyTime, set startFreeTime
-  	//         return serveCustomer 
-	
-	// add statements
        setStartFreeTime(serveCustomer.getFinishTime());
        setEndBusyTime(serveCustomer.getFinishTime());
        updateTotalBusyTime();
