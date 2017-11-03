@@ -1,13 +1,8 @@
-package PJ3;
+package GroceryStoreSimulator;
 
 import java.util.*;
 import java.io.*;
 import PJ3.CheckoutArea;
-
-// You may add new functions or data fields in this class 
-// You may modify any functions or data members here
-// You must use Customer, Cashier and CheckoutArea classes
-// to implement SuperMart simulator
 
 class SuperMart {
 
@@ -21,10 +16,10 @@ class SuperMart {
   private int numGoaway, numServed, totalWaitingTime;
 
   // internal data
-  private int counter;	             // customer ID counter
-  private CheckoutArea checkoutarea; // checkout area object
-  private Scanner dataFile;	     // get customer data from file
-  private Random dataRandom;	     // get customer data using random function
+  private int counter;	           
+  private CheckoutArea checkoutarea; 
+  private Scanner dataFile;	     
+  private Random dataRandom;	     
   
   
   // most recent customer arrival info, see getCustomerData()
@@ -34,7 +29,6 @@ class SuperMart {
   Scanner input=new Scanner(System.in);
    
   
-  // initialize data fields
   private SuperMart()
   {
       
@@ -73,11 +67,11 @@ class SuperMart {
         System.out.print("Enter 0/1 to get data from random/file        : ");
         random=input.nextInt();
         
-        System.out.println("Enter filename                                : DataFile");
+        System.out.println("Enter filename                              : DataFile");
         
         try
         {
-            dataFile=new Scanner(new File("G:/SEMESTER 3/CSC 220/pj3-stud/pj3-stud/DataFile"));
+            dataFile=new Scanner(new File("<<Give Location of data File>>"));
         }
         catch(FileNotFoundException e)
         {
@@ -88,9 +82,6 @@ class SuperMart {
   // Refer to step 1 in doSimulation()
   private void getCustomerData()
   {
-	// get next customer data : from file or random number generator
-	// set anyNewArrival and serviceTime
-	// see Readme file for more info
 	if(random==1)
         {
           anyNewArrival = (((dataFile.nextInt() % 100) + 1) <= chancesOfArrival);
@@ -113,7 +104,7 @@ class SuperMart {
         System.out.println("******* START SIMULATION ********");
         System.out.println();
         System.out.println("Customer #1 to #"+counter+" is ready.....");
-	// Initialize CheckoutArea
+	// Initializing CheckoutArea
         checkoutarea=new CheckoutArea(numCashiers, customerQLimit);
 
 	// Time driver simulation loop
@@ -165,16 +156,11 @@ class SuperMart {
 
   private void printStatistics()
   {
-      
-	// add statements into this method!
 	// print out simulation results
         System.out.println();
         System.out.println("*******************End of Simulation report***************** ");
         System.out.println();
         
-        
-	// see the given example in project statement
-        // you need to display all free and busy gas pumps
         
         System.out.println("\t# of arrival customers    : " + (counter + numGoaway -1));
         System.out.println("\t# customer gone-away      : " + numGoaway);
@@ -228,8 +214,7 @@ class SuperMart {
             checkoutarea.insertFreeCashierQ(busyCashier);
           }
           else
-          {
-            //If top cashier is not free (priority queue), end check
+	  {
             break;
           }
         } 
