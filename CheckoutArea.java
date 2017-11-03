@@ -1,32 +1,6 @@
-package PJ3;
+package GroceryStoreSimulator;
 
 import java.util.*;
-
-//--------------------------------------------------------------------------
-//
-// Define simulation queues in a checkout area. Queues hold references to Customer 
-// and Cashier objects
-//
-// Customer (FIFO) queue is used to hold waiting customers. If the queue is too long
-// (i.e. >  customerQLimit), customer goes away without entering customer queue
-//
-// There are several cashiers in a checkout area. Use PriorityQueue to 
-// hold BUSY cashiers and FIFO queue to hold FREE cashiers, 
-// i.e. a cashier that is FREE for the longest time should start be used first.
-//
-// To handle cashier in PriorityQueue, we need to define comparator 
-// for comparing 2 cashier objects. Here is a constructor from Java API:
-//
-// 	PriorityQueue(int initialCapacity, Comparator<? super E> comparator) 
-//
-// For priority queue, the default compare function is "natural ordering"
-// i.e. for numbers, minimum value is returned first
-//
-// User can define own comparator class for PriorityQueue.
-// For cashier objects, we like to have smallest end busy interval time first.
-// i.e. use Cashier's getEndBusyTime() 
-//
-// The following class define compare() for two cashiers :
 
 class CompareCashier implements Comparator<Cashier>{
 	// overide compare() method
@@ -35,25 +9,16 @@ class CompareCashier implements Comparator<Cashier>{
 	}
 }
 
-// DO NOT ADD NEW METHODS OR NEW DATA FIELDS
 
 class CheckoutArea {
 
-  
-  // Private data fields:
-  
-  // define one priority queue 
   private PriorityQueue <Cashier> busyCashierQ;
 
-  // define two FIFO queues
   private Queue<Customer> customerQ;
   private Queue<Cashier> freeCashierQ;
 
-  // define customer queue limit
   private int customerQLimit;
 
-
-  // Constructor 
   public CheckoutArea() 
   {
     busyCashierQ = new PriorityQueue<>();
@@ -62,29 +27,22 @@ class CheckoutArea {
     customerQLimit = 0;
   }
 
-  // Constructor 
   public CheckoutArea(int numCashiers, int customerQlimit)
   {
-	// use ArrayDeque to construct FIFO queue objects
         customerQ = new <Customer>ArrayDeque(customerQlimit);
         freeCashierQ = new <Cashier>ArrayDeque(numCashiers);
         
-	// construct PriorityQueue object
- 	// overide compare() in Comparator to compare Cashier objects
 	busyCashierQ= new PriorityQueue<Cashier>( numCashiers, new CompareCashier());
 						   
 
-	// initialize customerQlimit
         this.customerQLimit=customerQlimit;
-        
-        // Construct Cashier objects and insert into FreeCashierQ
+       
 	for(int i=1;i<=numCashiers;i++)
         {
             
             Cashier newCashier=new Cashier(i);
             freeCashierQ.add(newCashier);
         }
-	// add statements
   }
 
 
@@ -93,26 +51,21 @@ class CheckoutArea {
   // -------------------------------------------------
   public Cashier removeFreeCashierQ()
   {
-	// remove and return a free cashier
-	// Add statetments
 	return freeCashierQ.remove();
   }
 
   public void insertFreeCashierQ(Cashier cashier)
   {
-	  // insert a free cashier
           freeCashierQ.add(cashier);
   }
 
   public boolean emptyFreeCashierQ()
   {
-	// is freeCashierQ empty?
 	return freeCashierQ.isEmpty();
   }
 
   public int sizeFreeCashierQ()
   {
-	// get number of free cashiers
 	return freeCashierQ.size();
   }
 
@@ -122,32 +75,26 @@ class CheckoutArea {
 
   public Cashier removeBusyCashierQ() 
   {
-	// remove and return a busy cashier
 	return busyCashierQ.remove();
   }
 
   public void insertBusyCashierQ(Cashier cashier)
   {
-	// insert a busy cashier
 	busyCashierQ.add(cashier);
   }
 
   public boolean emptyBusyCashierQ()
   {
-	// is busyCashierQ empty?
 	return busyCashierQ.isEmpty();
   }
 
   public int sizeBusyCashierQ()
   {
-	// get number of busy cashiers
 	return busyCashierQ.size();
   }
 
   public Cashier peekBusyCashierQ() 
   {
-	// get highest prioirty cashier
-	// "retrieve" but not "remove"
 	return busyCashierQ.peek();
   }
 
@@ -158,14 +105,11 @@ class CheckoutArea {
 
   public Customer removeCustomerQ()
   {
-	// remove and return a customer 
 	return customerQ.remove();
   }
 
   public void insertCustomerQ(Customer customer)
   {
-	// insert a customer 
-        
       if(!isCustomerQTooLong()){
 	customerQ.add(customer);}
       
@@ -175,19 +119,16 @@ class CheckoutArea {
 
   public boolean emptyCustomerQ()
   {
-	// is customerQ empty?
 	return customerQ.isEmpty();
   }
 
   public int sizeCustomerQ()
   {
-	// get number of customers 
 	return customerQ.size();
   }
 
   public boolean isCustomerQTooLong()
   {
-	// is customerQ too long?
 	boolean result;
         result = (customerQ.size() > customerQLimit);
 	return result;
@@ -273,8 +214,6 @@ class CheckoutArea {
 	System.out.println("Remove busy cashier:"+p4);
 
    }
-
-
 }
 
 
