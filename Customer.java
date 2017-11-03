@@ -1,6 +1,5 @@
-// DO NOT ADD NEW METHODS OR NEW DATA FIELDS!
 
-package PJ3;
+package GroceryStoreSimulator;
 
 class Customer
 {
@@ -10,7 +9,6 @@ class Customer
     private int finishTime;
     private int waitTime;
 
-    // default constructor
     Customer()
     {
         customerID=0;
@@ -20,7 +18,6 @@ class Customer
         waitTime=0;
     }
 
-    // constructor to set customerID, serviceTime and arrivalTime
     Customer(int customerid, int servicetime, int arrivaltime)
     {
   	this.customerID  = customerid;
